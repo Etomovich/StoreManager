@@ -195,18 +195,85 @@ table {
 /* Logo Styles*/
 
 .store-logo {
-    padding-bottom: 10px;
+    padding-bottom: 5px;
     border-radius: 10px;
     float: left;
 }
 
 .store-logo:hover {
-    border: 2px solid #648880;
+    border: 3px solid azure;
+    box-shadow: 2px 2px azure;
 }
 
 .store-logo img {
     padding-bottom: 5px;
     height: 60px;
+}
+
+.nav-small-devices {
+    background: content-box;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    padding: 7px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 26px;
+    margin-right: 10px;
+}
+
+.nav-small-devices:hover {
+    background: border-box;
+    background-color: #54a8c0;
+    cursor: pointer;
+}
+
+
+/* makes header responsive*/
+
+@media only screen and (max-width: 400px) {
+    .navig {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 400px) {
+    .navig2 {
+        display: none;
+    }
+}
+
+.navig2 {
+    padding-top: 12px;
+    float: right;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    font-weight: 300;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.show {
+    display: block;
+}
+
+
+/* Links inside the dropdown */
+
+.dropdown-content a {
+    
+    color: black;
+    padding: 12px 5px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
 }
 
 
@@ -272,7 +339,7 @@ table {
 }
 
 .icons {
-    width: 500px;
+    width: 200px;
     margin: 2px auto 0 auto;
 }
 
