@@ -1,0 +1,309 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 2. v2.0 | 20110126
+  License: none (public domain)
+*/
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+
+/* HTML5 display-role reset for older browsers */
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block;
+}
+
+body {
+    line-height: 1;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+blockquote,
+q {
+    quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+    content: '';
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+
+/*-------Reset ends here--------*/
+
+
+/*
+    =========================================
+            Box Layout
+    =========================================
+*/
+
+*,
+*:before,
+*:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+
+/* Body styles */
+
+
+/* Helper classes*/
+
+.clearfix:before,
+.clearfix:after {
+    content: "";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    clear: both;
+    *zoom: 1;
+}
+
+
+/*
+    =========================================
+            Header Section
+    =========================================
+*/
+
+.head-div {
+    background: -webkit-linear-gradient(to right, rgb(129, 129, 129), rgb(235, 235, 235), rgb(129, 129, 129));
+    background: -moz-linear-gradient(to right, rgb(129, 129, 129), rgb(235, 235, 235), rgb(129, 129, 129));
+    background: linear-gradient(to right, rgb(129, 129, 129), rgb(235, 235, 235), rgb(129, 129, 129));
+    height: 80px;
+    width: 100%;
+    box-shadow: 0px 5px 2px #888888;
+    z-index: 20;
+}
+
+
+/* Logo Styles*/
+
+.store-logo {
+    padding-bottom: 10px;
+    border-radius: 10px;
+    float: left;
+}
+
+.store-logo:hover {
+    border: 2px solid #648880;
+}
+
+.store-logo img {
+    padding-bottom: 5px;
+    height: 60px;
+}
+
+
+/* Navigation elements */
+
+.navig {
+    margin-top: 10px;
+    text-align: right;
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 1em;
+}
+
+.navig li {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: inline-block;
+    margin: 0 10px;
+    vertical-align: top;
+}
+
+.navig li a {
+    text-decoration: none;
+    color: white;
+}
+
+.navig li a:hover {
+    text-decoration: none;
+    color: rgb(17, 89, 17);
+}
+
+.navig li:last-child {
+    margin-right: 10px;
+}
+
+
+/*
+    =========================================
+                Footer section
+    =========================================
+*/
+
+.footer-div {
+    background: -webkit-linear-gradient(to right, rgb(129, 129, 129), rgb(235, 235, 235), rgb(129, 129, 129));
+    background: -moz-linear-gradient(to right, rgb(129, 129, 129), rgb(235, 235, 235), rgb(129, 129, 129));
+    background: linear-gradient(to right, rgb(129, 129, 129), rgb(235, 235, 235), rgb(129, 129, 129));
+    height: 90px;
+    box-shadow: 0px -5px 2px #888888;
+    position: fixed;
+    width: 100%;
+    text-align: center;
+    left: 0;
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: #54a8c0;
+    right: 0;
+    bottom: 0;
+    z-index: 20;
+}
+
+.footer-items {
+    padding-top: 1px;
+}
+
+.icons {
+    width: 500px;
+    margin: 2px auto 0 auto;
+}
+
+.icons a {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin: 10px;
+    vertical-align: middle;
+    -o-transition: all .3s;
+    -moz-transition: all .3s;
+    -webkit-transition: all .3s;
+    -ms-transition: all .3s;
+}
+
+.icons a.twitter {
+    background: url(../images/img/social-icons/twitter.png) left top no-repeat;
+}
+
+.icons a.facebook {
+    background: url(../images/img/social-icons/facebook.png) left top no-repeat;
+}
+
+.icons a.github {
+    background: url(../images/img/social-icons/github.png) left top no-repeat;
+}
+
+.icons a.linkedin {
+    background: url(../images/img/social-icons/linkedin.png) left top no-repeat;
+}
+
+.icons a:hover {
+    background-position: left -34px;
+}
