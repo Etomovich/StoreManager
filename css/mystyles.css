@@ -1,0 +1,536 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 2. v2.0 | 20110126
+  License: none (public domain)
+*/
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+
+/* HTML5 display-role reset for older browsers */
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block;
+}
+
+body {
+    line-height: 1;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+blockquote,
+q {
+    quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+    content: '';
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+
+/*-------Reset ends here--------*/
+
+
+/*
+    =========================================
+            Box Layout
+    =========================================
+*/
+
+*,
+*:before,
+*:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+
+/* Body styles */
+
+
+/* Helper classes*/
+
+.clearfix:before,
+.clearfix:after {
+    content: "";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    clear: both;
+    *zoom: 1;
+}
+
+
+/*
+    =========================================
+            Header Section
+    =========================================
+*/
+
+.head-div {
+    background: -webkit-linear-gradient(to right, rgb(129, 129, 129), rgb(235, 235, 235), rgb(129, 129, 129));
+    background: -moz-linear-gradient(to right, rgb(129, 129, 129), rgb(235, 235, 235), rgb(129, 129, 129));
+    background: linear-gradient(to right, rgb(129, 129, 129), rgb(235, 235, 235), rgb(129, 129, 129));
+    height: 80px;
+    width: 100%;
+    box-shadow: 0px 5px 2px #888888;
+    z-index: 20;
+}
+
+
+/* Logo Styles*/
+
+.store-logo {
+    padding-bottom: 5px;
+    border-radius: 10px;
+    float: left;
+}
+
+.store-logo:hover {
+    border: 2px solid #fff;
+}
+
+.store-logo img {
+    padding-bottom: 5px;
+    height: 60px;
+}
+
+.nav-small-devices {
+    background: content-box;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    padding: 7px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 26px;
+    margin-right: 10px;
+}
+
+.nav-small-devices:hover {
+    background: border-box;
+    background-color: #54a8c0;
+    cursor: pointer;
+}
+
+
+/* makes header responsive*/
+
+@media only screen and (max-width: 500px) {
+    .navig {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 500px) {
+    .navig2 {
+        display: none;
+    }
+}
+
+.navig2 {
+    padding-top: 12px;
+    float: right;
+}
+.dropbtn:hover{
+    border: 1px solid #fff;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    font-weight: 300;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.show {
+    display: block;
+}
+
+
+/* Links inside the dropdown */
+
+.dropdown-content a {
+    
+    color: black;
+    padding: 12px 5px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+.dropdown-content a:hover {
+    background: gray;
+    color: white;
+    padding: 12px 5px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+
+/* Navigation elements */
+
+.navig {
+    margin-top: 10px;
+    text-align: right;
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 1em;
+}
+
+.navig li {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: inline-block;
+    margin: 0 10px;
+    vertical-align: top;
+}
+
+.navig li a {
+    text-decoration: none;
+    color: white;
+}
+
+.navig li a:hover {
+    text-decoration: none;
+    color: #54a8c0;
+}
+
+.navig li:last-child {
+    margin-right: 10px;
+}
+
+
+/*
+    =========================================
+                Footer section
+    =========================================
+*/
+
+.footer-div {
+    background: -webkit-linear-gradient(to right, rgb(129, 129, 129), rgb(235, 235, 235), rgb(129, 129, 129));
+    background: -moz-linear-gradient(to right, rgb(129, 129, 129), rgb(235, 235, 235), rgb(129, 129, 129));
+    background: linear-gradient(to right, rgb(129, 129, 129), rgb(235, 235, 235), rgb(129, 129, 129));
+    height: 90px;
+    box-shadow: 0px -5px 2px #888888;
+    position: fixed;
+    width: 100%;
+    text-align: center;
+    left: 0;
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: #54a8c0;
+    right: 0;
+    bottom: 0;
+    z-index: 20;
+}
+
+.footer-items {
+    padding-top: 1px;
+}
+
+.icons {
+    width: 200px;
+    margin: 2px auto 0 auto;
+}
+
+.icons a {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin: 10px;
+    vertical-align: middle;
+    -o-transition: all .3s;
+    -moz-transition: all .3s;
+    -webkit-transition: all .3s;
+    -ms-transition: all .3s;
+}
+
+.icons a.twitter {
+    background: url(../images/img/social-icons/twitter.png) left top no-repeat;
+}
+
+.icons a.facebook {
+    background: url(../images/img/social-icons/facebook.png) left top no-repeat;
+}
+
+.icons a.github {
+    background: url(../images/img/social-icons/github.png) left top no-repeat;
+}
+
+.icons a.linkedin {
+    background: url(../images/img/social-icons/linkedin.png) left top no-repeat;
+}
+
+.icons a:hover {
+    background-position: left -34px;
+}
+
+
+/*
+    =========================================
+                Login body section
+    =========================================
+*/
+.main-div{
+    width : 100%;
+    text-align: center;
+    margin-bottom: 120px;
+    align-content: center;
+}
+
+.login-div{
+    display: inline-block;
+    padding-top: 5px;
+    background-color: rgba(0, 0, 0, 0.3);
+    min-height: 250px;
+    width: 100%;
+    max-width: 500px;
+    margin-top:80px;
+    color: #fff;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    margin-bottom: 30px;
+    box-shadow: 0px 8px 16px 0px rgba(31, 73, 125, 0.7);
+   
+}
+
+.login-group{
+    margin-top: 15px;
+    
+}
+
+.login-group label {
+
+    color: white;
+    cursor: pointer;
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    font-weight: 500;
+}
+
+.login-group input {
+    border: 1px solid #c6c9cc;
+    border-radius: 5px;
+    color: #888;
+    display: block;
+    margin: 5px 3px 20px 8px;
+    padding: 5px 8px;
+    width: 95%;
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+
+.login-group input:focus{
+    border: 2px solid #fff;
+    background-color: #54a8c0;
+    color: #fff;
+    font-weight: bold;
+}
+/*My buttons*/
+
+.btn {
+    border-radius: 5px;
+    display: inline-block;
+    margin-top: 12px;
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+    letter-spacing: .5px;
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+}
+
+.btn-alt {
+    border: 1px solid #fff;
+    background: #54a8c0;    
+    background-color: #54a8c0;
+    padding: 10px 30px;
+}
+
+.btn-alt:hover {
+    background: #fff;
+    border: 2px solid #54a8c0;    
+    color: #648880;
+}
+
+/*
+    =========================================
+                Landing body section
+    =========================================
+*/
+.landing-main-div{
+    width : 100%;
+    text-align: center;
+    margin-bottom: 120px;
+}
+
+.landing-div{
+    display: inline-block;
+    padding-top: 5px;
+    background-color: rgba(0, 0, 0, 0.3);
+    min-height: 400px;
+    width: 100%;
+    max-width: 700px;
+    margin-top:20px;
+    color: #fff;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    box-shadow: 0px 8px 16px 0px rgba(31, 73, 125, 0.7);
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    
+   
+}
+
+.landing-div h2{
+    color: #fff;
+    font-weight: bold;
+    letter-spacing: .5px;
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif; 
+    font-size: 35px;
+    margin-top: 50px;
+    text-shadow:  1px 3px 0px rgba(31, 73, 125, 0.7);    
+}
+
+.landing-div p{
+    color: #fff;
+    font-weight: 200px;
+    letter-spacing: .5px;
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif; 
+    font-size: 20px;
+    margin-top: 50px;
+    margin-left: 30px;
+    margin-right: 30px;
+    text-shadow:  1px 2px 0px rgba(31, 73, 125, 0.7);
+}
+
+#landing-button{
+    margin-top: 50px;
+    width: 150px;
+    height: 70px;
+    font-size: 20px;
+}
+
+
+
+
+
