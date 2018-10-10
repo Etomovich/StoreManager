@@ -703,3 +703,39 @@ table {
     padding-right: 10px;
     padding-left: 10px;
 }
+
+.general-sales-header {
+    text-align: left;
+    margin-bottom: 50px;
+}
+
+#head-item {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.head-form {
+    float: right;
+}
+
+#search-item {
+    display: inline-block;
+}
+
+.search-group input {
+    border: 1px solid #c6c9cc;
+    border-radius: 5px;
+    color: #888;
+    display: block;
+    margin-right: 15px;
+    padding: 5px 8px;
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+
+.search-group input:focus {
+    border: 2px solid #fff;
+    background-color: #54a8c0;
+    color: #fff;
+    font-weight: bold;
+}
