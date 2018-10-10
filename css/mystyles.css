@@ -182,9 +182,9 @@ table {
 */
 
 .head-div {
-    background: -webkit-linear-gradient(to right, rgb(129, 129, 129), rgb(235, 235, 235), rgb(129, 129, 129));
-    background: -moz-linear-gradient(to right, rgb(129, 129, 129), rgb(235, 235, 235), rgb(129, 129, 129));
-    background: linear-gradient(to right, rgb(129, 129, 129), rgb(235, 235, 235), rgb(129, 129, 129));
+    background: -webkit-linear-gradient(to right, rgb(129, 129, 129), rgb(129, 129, 129),rgb(210, 210, 210));
+    background: -moz-linear-gradient(to right, rgb(129, 129, 129), rgb(129, 129, 129),rgb(210, 210, 210));
+    background: linear-gradient(to right, rgb(129, 129, 129), rgb(129, 129, 129),rgb(210, 210, 210));
     height: 80px;
     width: 100%;
     box-shadow: 0px 5px 2px #888888;
