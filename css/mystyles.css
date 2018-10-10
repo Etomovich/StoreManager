@@ -799,3 +799,41 @@ table {
     background: #fff;
     border: 2px, solid, rgba(248,50,144);
 }
+
+/*
+    =========================================
+                edit user body section
+    =========================================
+*/
+.edit-div {
+    display: inline-block;
+    padding-top: 5px;
+    background-color: rgba(0, 0, 0, 0.3);
+    min-height: 250px;
+    width: 100%;
+    max-width: 500px;
+    margin-top: 80px;
+    color: #fff;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    margin-bottom: 30px;
+    box-shadow: 0px 8px 16px 0px rgba(31, 73, 125, 0.7);
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+}
+
+.edit-div h2{
+    color: #fff;
+    font-weight: bold;
+    letter-spacing: .5px;   
+    font-size: 25px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-shadow: 1px 3px 0px rgba(31, 73, 125, 0.7);
+}
+
+.edit-div .btn{
+    margin-bottom:20px; 
+}
+
+
