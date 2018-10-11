@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Store Manager - Login</title>
+    <title>Store Manager - Modify Item</title>
     <!--  Sets an image as your pages icon -->
     <link rel=" icon" href="images/title-icon.png">
     <link rel="stylesheet" href="css/mystyles.css">
@@ -17,7 +17,7 @@
         </div>
         <nav class="navig">
             <ul>
-                <li><a href="#">Users</a></li>
+                <li><a href="#">Products</a></li>
                 <li><a href="#">About Us</a></li>
                 <li><a href="#">Help</a></li>
                 <li><a href="#">Log Out</a></li>
@@ -27,7 +27,7 @@
             <div class="dropdown">
                 <button class="nav-small-devices dropbtn" onclick="myFunction()">&#9776;</button>
                 <div class="dropdown-content" id="myDropdown">
-                    <a href="#">Users</a>
+                    <a href="#">Products</a>
                     <a href="#">About Us</a>
                     <a href="#">Help</a>
                     <a href="#">Log Out</a>
@@ -37,38 +37,29 @@
     </header>
     <section class="main-div">
         <div class="edit-div">
-            <h2>Modify User</h2>
+            <h2>Modify Item</h2>
             <form action="#" method="#">
                 <fieldset class="login-group">
                     <label>
-                        Name
-                        <input type="text" name="name" placeholder="Faruk Juma" required>
+                        Item ID
+                        <input type="text" name="name" placeholder="3002" required>
                     </label>
                     <label>
-                        Username
-                        <input type="text" name="name" placeholder="juma101" required>
+                        Item Name
+                        <input type="text" name="name" placeholder="Kiwi 300g" required>
                     </label>
                     <label>
-                        Email
-                        <input type="text" name="name" placeholder="frank_jumma@juma.com" required>
+                        Serial Number
+                        <input type="text" name="name" placeholder="2r34k5k6k44" required>
                     </label>
                     <label>
-                        Role
-                        <input type="text" name="name" placeholder="admin" required>
+                        Expiration
+                        <input type="text" name="name" placeholder=" 20/5/2022" required>
                     </label>
                     <label>
-                        Phone
-                        <input type="text" name="name" placeholder=" 0717323142" required>
+                        Product Name:
+                        <input type="text" name="name" placeholder=" Kiwi 300g" required>
                     </label>
-
-                    <label>
-                        Password
-                        <input type="password" name="email" placeholder="Password" required>
-                    </label>
-                    <label>
-                        Retype-Password
-                        <input type="password" name="email" placeholder="Password" required>
-					</label>
                 </fieldset>
 
                 <input class="btn btn-alt" type="submit" name="submit" value="Edit">

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Store Manager - View User</title>
+    <title>Store Manager - Create Product</title>
     <!--  Sets an image as your pages icon -->
     <link rel=" icon" href="images/title-icon.png">
     <link rel="stylesheet" href="css/mystyles.css">
@@ -35,35 +35,34 @@
             </div>
         </nav>
     </header>
-    <section class="person-main-div">
-        <div class="person-div">
-            <h4>Personal Info</h4>
-            <div class="view-item-div">
-                <label class="title-label">Name:</label>
-                <label class="body-label">Faruk Juma</label>
-            </div>
-            <div class="view-item-div">
-                <label class="title-label">Username:</label>
-                <label class="body-label">juma101</label>
-            </div>
-            <div class="view-item-div">
-                <label class="title-label">Role:</label>
-                <label class="body-label">Admin</label>
-            </div>
-            <div class="view-item-div">
-                <label class="title-label">Lifetime Sales:</label>
-                <label class="body-label">Ksh 200,000</label>
-            </div>
-            <div class="view-item-div">
-                <label class="title-label">Phone:</label>
-                <label class="body-label">0717323142</label>
-            </div>
-            <div class="view-item-div">
-                <label class="title-label">Email:</label>
-                <label class="body-label">frank_jumma@juma.com</label>
-            </div>
-            <button class="btn btn-alt" id="person-button-delete">Delete</button>
-            <button class="btn btn-alt" id="person-button">Edit</button>
+    <section class="main-div">
+        <div class="edit-div">
+            <h2>Create Product</h2>
+            <form action="#" method="#">
+                <fieldset class="login-group">
+                    <label>
+                        Product ID
+                        <input type="text" name="name" placeholder="3002" required>
+                    </label>
+                    <label>
+                        Product Name:
+                        <input type="text" name="name" placeholder="Kiwi 300g" required>
+                    </label>
+                    <label>
+                        Price Per Unit:
+                        <input type="text" name="name" placeholder="Ksh 45" required>
+                    </label>
+                    <label>
+                        Category:
+                        <input type="text" name="name" placeholder=" rangi" required>
+                    </label>
+                </fieldset>
+
+                <input class="btn btn-alt" type="submit" name="submit" value="Edit">
+                <button class="btn btn-alt" id="person-button-delete">Discard</button>
+
+            </form>
+
         </div>
 
     </section>
