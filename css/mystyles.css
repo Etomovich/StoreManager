@@ -836,4 +836,26 @@ table {
     margin-bottom:20px; 
 }
 
+/* View sales styles */
+.view-sales-div {
+    display: inline-block;
+    padding-top: 5px;
+    padding-bottom: 30px;
+    background-color: whitesmoke;
+    min-height: 400px;
+    width: 100%;
+    max-width: 90%;
+    margin-top: 20px;
+    color: rgb(80, 80, 80);
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    box-shadow: 0px 8px 16px 0px rgba(31, 73, 125, 0.7);
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+}
+
+.sale-body{
+    font-weight: 400;
+}
 
