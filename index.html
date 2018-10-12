@@ -2,27 +2,55 @@
 <html>
 
 <head>
-    <title> Help Guide To LFA</title>
+    <meta charset="utf-8">
+    <title>Store Manager - Welcome</title>
+    <!--  Sets an image as your pages icon -->
+    <link rel=" icon" href="images/title-icon.png">
+    <link rel="stylesheet" href="css/mystyles.css">
+    <script src="js/myjs.js"></script>
 </head>
 
 <body>
-    <h1>Guide through Etomovich Store Manager</h1>
-    <p>Thank you Andela For giving me a chance to show case my skills at such a plat form. Keep the fire burning!!!</p>
-    <p>I have tried to make all pages responsive so dont be afraid of squeezing your display!!</p>
-    <p>Note: These are just html templates minus functionality which I inttend to do with Flask!!</p>
+    <header class="head-div clearfix">
+        <div class="store-logo">
+            <img src="images/one-icon.png" alt="STACK OVERFLOW LITE">
+        </div>
+        <nav class="navig">
+            <ul>
+                <li><a href="../StoreManager/templates/store_attendant_dash.html">Attendant Dashboard</a></li>
+				<li><a href="../StoreManager/templates/store_owner_dash.html">Owner's Dashboard</a></li>
+            </ul>
+        </nav>
+        <nav class="navig2">
+            <div class="dropdown">
+                <button class="nav-small-devices dropbtn" onclick="myFunction()">&#9776;</button>
+                <div class="dropdown-content" id="myDropdown">
+                    <a href="../StoreManager/templates/store_attendant_dash.html">Attendant Dashboard</a>
+					<a href="../StoreManager/templates/store_owner_dash.html">Owner's Dashboard</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <section class="landing-main-div">
+        <div class="landing-div">
+            <h2>Welcome to Etomovich Stores!</h2>
+            <p>Etomovich Store manager is a web application that is used in a store or supermarket environment allowing the owner to track movements of products and also monitor store attendants. </p>
+            <a href="../StoreManager/templates/login_view.html" class="btn btn-alt" id="landing-button">Login</a>
+        </div>
 
-    <h1>Access To Landing Page</h1>
-    <a href="../StoreManager/templates/landing_page.html">Check Landing page Here</a>
-
-    <h1>Access To login</h1>
-    <a href="../StoreManager/templates/login_view.html">Check Login Here</a>
-
-    <h3>After a sales attendant is logged in he/she is taken here!!</h3>
-    <p>I have tried to implement atleast one button for every page item for you to get the flow of all user attendant pages!!</p>
-    <a href="../StoreManager/templates/store_attendant_dash.html">Sales Attendant dash board</a>
-
-    <h3>After an account owner is logged in he/she is taken here!!</h3>
-    <a href="../StoreManager/templates/store_owner_dash.html">Store Owner dash board</a>
+    </section>
+    <footer class="footer-div">
+        <div class="icons">
+            <a class="github" href=""></a>
+            <a class="facebook" href=""></a>
+            <a class="twitter" href=""></a>
+            <a class="linkedin" href=""></a>
+        </div>
+        <div class="footer-items">
+            <p>@Andela_Kenya Bootcamp Cycle 33</p>
+            <p>&copy; Etomovich Productions 2018</p>
+        </div>
+    </footer>
 </body>
 
 </html>
