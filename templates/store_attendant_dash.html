@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Store Manager - Welcome</title>
+    <!--  Sets an image as your pages icon -->
+    <link rel=" icon" href="images/title-icon.png">
+    <link rel="stylesheet" href="css/mystyles.css">
+    <script src="js/myjs.js"></script>
+</head>
+
+<body>
+    <header class="head-div clearfix">
+        <div class="store-logo">
+            <img src="images/one-icon.png" alt="STACK OVERFLOW LITE">
+        </div>
+        <nav class="navig">
+            <ul>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Help</a></li>
+                <li><a href="#">Log Out</a></li>
+            </ul>
+        </nav>
+        <nav class="navig2">
+            <div class="dropdown">
+                <button class="nav-small-devices dropbtn" onclick="myFunction()">&#9776;</button>
+                <div class="dropdown-content" id="myDropdown">
+                    <a href="#">About Us</a>
+                    <a href="#">Help</a>
+                    <a href="#">Log Out</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <section class="dash-main-div">
+        <h2 class="dash-heading">My Activities.</h2>
+        <div class="dash-div">
+            <h2>My Profile.</h2>
+            <p>This module allows a store attendant to view his/her personal details.</p>
+            <a href="../templates/my_profile_attendant.html" class="btn btn-alt" id="dash-button">Take Me Here</a>
+        </div>
+        <div class="dash-div">
+            <h2>My Sales.</h2>
+            <p>This module allows a store attendant to view his/her sales he/she has made.</p>
+            <a href="../templates/life_time_sales.html" class="btn btn-alt" id="dash-button">Take Me Here</a>
+        </div>
+        <div class="dash-div">
+            <h2>View Product.</h2>
+            <p>This module allows a store attendant to view products and adjust its category.</p>
+            <a href="../templates/attendant_view_product.html" class="btn btn-alt" id="dash-button">Take Me Here</a>
+        </div>
+        <div class="dash-div">
+            <h2>Shopping Cart.</h2>
+            <p>This module allows a store attendant to make a sale.</p>
+            <a href="../templates/shopping_cart.html" class="btn btn-alt" id="dash-button">Take Me Here</a>
+        </div>
+
+    </section>
+    <footer class="footer-div">
+        <div class="icons">
+            <a class="github" href=""></a>
+            <a class="facebook" href=""></a>
+            <a class="twitter" href=""></a>
+            <a class="linkedin" href=""></a>
+        </div>
+        <div class="footer-items">
+            <p>@Andela_Kenya Bootcamp Cycle 33</p>
+            <p>&copy; Etomovich Productions 2018</p>
+        </div>
+    </footer>
+</body>
+
+</html>
