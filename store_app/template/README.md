@@ -1,0 +1,1 @@
+THE TEMPLATES HAVE NOT YET BEEN incooporated to the api.
