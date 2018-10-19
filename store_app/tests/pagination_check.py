@@ -13,6 +13,12 @@ class PaginationCase(unittest.TestCase):
 
         #kur.has_next takes in a page and returns True if there is a page before that one else false
         self.assertEqual(kur.has_prev(3),True,msg="Kurasa paginator not working as expected")
+
+        #kur.has_next takes in a page and returns True if there is a page after that one else false
+        self.assertEqual(kur.prev_page(3),2,msg="Kurasa paginator not working as expected")
+
+        #kur.has_next takes in a page and returns True if there is a page before that one else false
+        self.assertEqual(kur.next_page(3),4,msg="Kurasa paginator not working as expected")
     
         #check that it fetches correct items
         self.assertEqual(kur.get_items(3),[67, 2, 3, 5, 6],msg="Kurasa paginator not working as expected")
