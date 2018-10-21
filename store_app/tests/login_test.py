@@ -2,6 +2,9 @@ import unittest
 import json
 from flask import Flask,request
 from store_app import create_app
+from Instance.config import Config
+
+from itsdangerous import (TimedJSONWebSignatureSerializer as Serializer, BadSignature, SignatureExpired)
 
 class LoginTests(unittest.TestCase):
     '''
@@ -41,20 +44,16 @@ class LoginTests(unittest.TestCase):
                 }
             
 
-    def get_root_access(self):
-        '''
-           Check Root user
-        '''
-        response2 = self.client.post('/api/v1/login', data=self.default,content_type='application/json')                                             
-        output = json.loads(response2)
-        token = output.request.headers.get("Authorization")
-        return {'Authorization':  token}
+    def get_admin_access(self):
+        s = Serializer(Config.SECRET_KEY)
+        token = s.dumps({'username': 'etomovich'})
+        return token
 
     def test_registration_with_valid_credentials(self):
         '''Tests that a user is registered successfully'''
 
-        access = self.get_root_access()
-        response = self.client.post('/api/v1/admin/users', data=self.valid_credentials,headers={"Authorization":access['Authorization']},content_type='application/json')
+        access = self.get_admin_access()
+        response = self.client.post('/api/v1/admin/users', data=self.user_1,headers={"Authorization":access['Authorization']},content_type='application/json')
         self.assertEqual(response.status_code, 201)
 
 if __name__ == "__main__":
