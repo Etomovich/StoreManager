@@ -54,11 +54,19 @@ class LoginTests(unittest.TestCase):
     def test_registration_with_valid_credentials(self):
         '''Tests that a user is registered successfully'''
 
-        self.client.environ_base['Authorization'] = self.get_admin_access()
+        '''self.client.environ_base['Authorization'] = self.get_admin_access()
         response = self.client.post('/api/v1/admin/users', data=self.user_1,content_type='application/json')
-        self.assertEqual(response.get_data(), "")
+        self.assertEqual(response.get_data(), "")'''
 
-        #self.assertEqual(response.status_code, 201)
+        from werkzeug.test import EnvironBuilder, run_wsgi_app
+        from werkzeug.wrappers import Request
+
+        builder = EnvironBuilder(path='/api/v1/admin/users', method='POST', data=self.user_1, headers={'Authorization': self.get_admin_access()})
+        env = builder.get_environ()
+
+        (app_iter, status, headers) = run_wsgi_app(self.app, env)
+
+        self.assertEqual(headers, "")
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
