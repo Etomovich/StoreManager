@@ -16,6 +16,9 @@ class LoginTests(unittest.TestCase):
         self.app_context = self.app.app_context()
         self.app_context.push()
 
+        self.default = json.dumps(
+            {"username": "etomovich", "password": "etomovich"})
+
         self.valid_credentials = json.dumps(
             {"username": "pato", "password": "pato123"})
         self.invalid_credentials = json.dumps(
@@ -38,19 +41,20 @@ class LoginTests(unittest.TestCase):
                 }
             
 
-    def get_token(self):
+    def get_root_access(self):
         '''
-           Registers a user.
+           Check Root user
         '''
-        response2 = self.client.post('/api/v1/login', data=self.valid_credentials,content_type='application/json') 
-        response = self.client.post('/api/v1/admin/users', data=self.user_1,content_type='application/json')                                            
+        response2 = self.client.post('/api/v1/login', data=self.default,content_type='application/json')                                             
         output = json.loads(response2.get_data())
         token = output.get('Authorization')
         return {'Authorization':  token}
 
     def test_registration_with_valid_credentials(self):
         '''Tests that a user is registered successfully'''
-        response = self.client.post('/api/v1/admin/users', data=self.valid_credentials,content_type='application/json')
+
+        access = self.get_root_access()
+        response = self.client.post('/api/v1/admin/users', data=self.valid_credentials,headers={"Authorization":access['Authorization']},content_type='application/json')
         self.assertEqual(response.status_code, 201)
 
 if __name__ == "__main__":
