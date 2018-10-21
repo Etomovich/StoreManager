@@ -1,6 +1,6 @@
 import unittest
 import json
-from flask import Flask,request
+from flask import request
 from store_app import create_app
 from Instance.config import Config
 
@@ -14,59 +14,40 @@ class LoginTests(unittest.TestCase):
     '''
 
     def setUp(self):
-        self.app = create_app('testing')
+        self.app = create_app("testing")
         self.client = self.app.test_client()
-        self.app_context = self.app.app_context()
-        self.app_context.push()
 
-        self.default = json.dumps(
-            {"username": "etomovich", "password": "etomovich"})
+        self.root_access = json.dumps({
+                        "username": "etomovich",
+                        "password": "etomovich"
+                        })
 
-        self.valid_credentials = json.dumps(
-            {"username": "pato", "password": "pato123"})
-        self.invalid_credentials = json.dumps(
-            {"username": "pato", "password": "etyy"})
-        self.blank_credentials = json.dumps({"username": '', 'password': ''})
-
-        self.user_1={
+        self.user_1=({
                     "username":"pato",
                     "name":"Patrick Musau",
                     "email":"pato@musau.com",
                     "phone":"05677823158",
                     "password":'pato123',
                     "retype_password":"pato123"  
-                }
-        self.user_2={
-                    "username":"pogie",
-                    "name":"Paul Pogba",
-                    "email":"pogie123@gmail.com",
-                    "phone":"045677",
-                    "password":'pogie',
-                    "retype_password":"pogie"   
-                }
-            
+                })
 
-    def get_admin_access(self):
-        s = Serializer(Config.SECRET_KEY)
-        token = s.dumps({'username': 'etomovich'})
-        return  token.decode('ascii')
+        self.valid_credentials = json.dumps(
+            {"username": "pato", "password": "pato123"})
+        self.invalid_credentials = json.dumps(
+            {"username": "pato", "password": "etyy"})
 
-    def test_registration_with_valid_credentials(self):
-        '''Tests that a user is registered successfully'''
+        self.context = self.app.app_context()
+        self.context.push()
 
-        '''self.client.environ_base['Authorization'] = self.get_admin_access()
-        response = self.client.post('/api/v1/admin/users', data=self.user_1,content_type='application/json')
-        self.assertEqual(response.get_data(), "")'''
-
-        from werkzeug.test import EnvironBuilder, run_wsgi_app
-        from werkzeug.wrappers import Request
-
-        builder = EnvironBuilder(path='/api/v1/admin/users', method='POST', data=self.user_1, headers={'Authorization': self.get_admin_access()})
-        env = builder.get_environ()
-
-        (app_iter, status, headers) = run_wsgi_app(self.client, env)
-
-        self.assertEqual(headers, "")
+    
+    def test_login_user(self):
+        #Get Token
+        admin_message = self.client.post("/api/v1/login",
+                                            data=self.root_access,
+                                            content_type='application/json')
+        
+        self.assertEqual("",admin_message,msg="error")
+        
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
