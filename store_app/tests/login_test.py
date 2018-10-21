@@ -56,8 +56,9 @@ class LoginTests(unittest.TestCase):
 
         access = self.get_admin_access()
         response = self.client.post('/api/v1/admin/users', data=self.user_1,headers=access,content_type='application/json')
-        self.assertEqual(response.status_code, 201)
         self.assertEqual(response.get_data, "")
+
+        #self.assertEqual(response.status_code, 201)
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
