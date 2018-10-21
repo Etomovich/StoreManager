@@ -47,7 +47,7 @@ class LoginTests(unittest.TestCase):
     def get_admin_access(self):
         s = Serializer(Config.SECRET_KEY)
         token = s.dumps({'username': 'etomovich'})
-        return token
+        return {"Authorization": token.decode('ascii')}
 
     def test_registration_with_valid_credentials(self):
         '''Tests that a user is registered successfully'''
