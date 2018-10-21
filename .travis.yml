@@ -9,11 +9,7 @@ before_script:
   - export PYTHONPATH=`pwd`
 # command to run tests
 script: 
-  - coverage run store_app/tests/error_messages.py
-  - coverage run store_app/tests/login_test.py
-  - coverage run store_app/tests/pagination_check.py
-  - coverage run store_app/tests/store_flask_test.py
-  - coverage run store_app/tests/store_test_welcome.py
+
   - nosetests store_app/tests --with-coverage --cover-package=store_app
   - coverage report -m
 after_success:
