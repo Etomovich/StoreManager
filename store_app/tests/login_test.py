@@ -46,7 +46,7 @@ class LoginTests(unittest.TestCase):
            Check Root user
         '''
         response2 = self.client.post('/api/v1/login', data=self.default,content_type='application/json')                                             
-        output = json.loads(response2.get_data())
+        output = json.loads(response2.get_wsgi_headers())
         token = output.get('Authorization')
         return {'Authorization':  token}
 
