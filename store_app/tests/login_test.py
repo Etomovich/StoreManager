@@ -40,14 +40,29 @@ class LoginTests(unittest.TestCase):
         self.context.push()
 
     
-    def test_login_user(self):
+    def test_landing_endpoint(self):
         #Get Token
+        admin_message = self.client.get("/api/v1/", content_type='application/json')
+        
+        self.assertEqual(admin_message.status_code,200,msg="Welcome endpoint not functioning as it should.")
+    
+    
+    def test_login_user(self):
         admin_message = self.client.post("/api/v1/login",
                                             data=self.root_access,
                                             content_type='application/json')
         
         self.assertEqual(admin_message.status_code,200,msg="Root user has a login error.")
         
+
+        def test_create_user(self):
+            s = Serializer(Config.SECRET_KEY, expires_in=21600)
+            token = s.dumps({'username': 'etomovich'})
+            admin_message = self.client.post("/api/v1/admin/users",
+                                            data=self.user_1,
+                                            content_type='application/json')
+        
+        self.assertEqual(admin_message.status_code,201,msg="Admin should have ability to create users")
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
