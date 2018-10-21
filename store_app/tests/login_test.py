@@ -46,8 +46,8 @@ class LoginTests(unittest.TestCase):
            Check Root user
         '''
         response2 = self.client.post('/api/v1/login', data=self.default,content_type='application/json')                                             
-        output = json.loads(response2.get_wsgi_headers())
-        token = output.get('Authorization')
+        output = json.loads(response2)
+        token = output.request.headers.get("Authorization")
         return {'Authorization':  token}
 
     def test_registration_with_valid_credentials(self):
