@@ -54,9 +54,7 @@ class LoginTests(unittest.TestCase):
         
         
         data=admin_message.data.decode()
-        expected='Login successful!! This token will be used to access all protected endpoints and will be valid for the next 6hrs then you will have to login again to access another token'
-        self.assertEqual(expected,data[1],msg="Admin should have ability to create users")
-        self.assertEqual(admin_message.status_code,200,msg="Admin should have ability to create users")
+        self.assertEqual(admin_message.status_code,200,msg="Admin should have ability to login to the system")
         
 
         def test_create_user(self):
@@ -67,6 +65,9 @@ class LoginTests(unittest.TestCase):
                                             content_type='application/json',
                                             headers={"Authorization":token.decode('ascii')})
 
+            data=admin_message.data.decode()
+            self.assertEqual("CREATED",data[1],msg="Admin should have ability to create users")
+            self.assertEqual(admin_message.status_code,201,msg="Admin should have ability to create users")
             
 
         
