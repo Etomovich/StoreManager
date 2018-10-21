@@ -52,7 +52,11 @@ class LoginTests(unittest.TestCase):
                                             data=self.root_access,
                                             content_type='application/json')
         
-        self.assertEqual(admin_message.status_code,200,msg="Root user has a login error.")
+        
+        data=admin_message.data.decode()
+        expected='Login successful!! This token will be used to access all protected endpoints and will be valid for the next 6hrs then you will have to login again to access another token'
+        self.assertEqual(expected,data['message'],msg="Admin should have ability to create users")
+        self.assertEqual(admin_message.status_code,200,msg="Admin should have ability to create users")
         
 
         def test_create_user(self):
@@ -62,8 +66,17 @@ class LoginTests(unittest.TestCase):
                                             data=self.user_1,
                                             content_type='application/json',
                                             headers={"Authorization":token.decode('ascii')})
+
+            data=admin_message.data.decode()
+            self.assertEqual("CREATED",data['STATUS'],msg="Admin should have ability to create users")
+            self.assertEqual("Patrick Musau",data['name'],msg="Admin should have ability to create users")
+            self.assertEqual("pato",data['username'],msg="Admin should have ability to create users")
+            self.assertEqual("pato@musau.com",data['email'],msg="Admin should have ability to create users")
+            self.assertEqual("05677823158",data['phone'],msg="Admin should have ability to create users")
+            self.assertEqual(admin_message.status_code,201,msg="Admin should have ability to create users")
+
         
-        self.assertEqual(json.loads(admin_message.data.decode()),201,msg="Admin should have ability to create users")
+        
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
