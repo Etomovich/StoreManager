@@ -14,10 +14,7 @@ class LoginTests(unittest.TestCase):
     '''
 
     def setUp(self):
-        self.app = create_app("testing")
-        self.client = self.app.test_client()
-
-        self.root_access = json.dumps({
+                self.root_access = json.dumps({
                         "username": "etomovich",
                         "password": "etomovich"
                         })
@@ -35,7 +32,9 @@ class LoginTests(unittest.TestCase):
             {"username": "pato", "password": "pato123"})
         self.invalid_credentials = json.dumps(
             {"username": "pato", "password": "etyy"})
-
+            
+        self.app = create_app("testing")
+        self.client = self.app.test_client()
         self.context = self.app.app_context()
         self.context.push()
 

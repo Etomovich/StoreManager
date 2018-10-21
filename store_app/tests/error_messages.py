@@ -2,6 +2,14 @@ import unittest
 from store_app.api.version1.errors import error_response
 
 class PaginationCase(unittest.TestCase):
+
+    def setUp(self):
+        self.app = create_app("testing")
+        self.client = self.app.test_client()
+        self.context = self.app.app_context()
+        self.context.push()
+
+
     def test_error_response_feeback(self):
         message ='Bad request'
         answ= error_response(400,message)
