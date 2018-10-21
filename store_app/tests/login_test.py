@@ -14,11 +14,10 @@ class LoginTests(unittest.TestCase):
     '''
 
     def setUp(self):
-                self.root_access = json.dumps({
+        self.root_access = json.dumps({
                         "username": "etomovich",
                         "password": "etomovich"
                         })
-
         self.user_1=({
                     "username":"pato",
                     "name":"Patrick Musau",
