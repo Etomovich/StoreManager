@@ -60,9 +60,10 @@ class LoginTests(unittest.TestCase):
             token = s.dumps({'username': 'etomovich'})
             admin_message = self.client.post("/api/v1/admin/users",
                                             data=self.user_1,
-                                            content_type='application/json')
+                                            content_type='application/json'
+                                            headers={"Authorization":token})
         
-        self.assertEqual(admin_message.status_code,201,msg="Admin should have ability to create users")
+        self.assertEqual(json.loads(admin_message.data.decode()),201,msg="Admin should have ability to create users")
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
