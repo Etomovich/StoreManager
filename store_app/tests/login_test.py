@@ -46,7 +46,7 @@ class LoginTests(unittest.TestCase):
                                             data=self.root_access,
                                             content_type='application/json')
         
-        self.assertEqual("",admin_message,msg="error")
+        self.assertEqual(admin_message.status_code,200,msg="Root user has a login error.")
         
 
 if __name__ == "__main__":
