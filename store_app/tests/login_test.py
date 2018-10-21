@@ -64,7 +64,7 @@ class LoginTests(unittest.TestCase):
         builder = EnvironBuilder(path='/api/v1/admin/users', method='POST', data=self.user_1, headers={'Authorization': self.get_admin_access()})
         env = builder.get_environ()
 
-        (app_iter, status, headers) = run_wsgi_app(self.app, env)
+        (app_iter, status, headers) = run_wsgi_app(self.client, env)
 
         self.assertEqual(headers, "")
 
