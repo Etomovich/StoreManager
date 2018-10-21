@@ -33,14 +33,16 @@ class LoginTests(unittest.TestCase):
                     "name":"Patrick Musau",
                     "email":"pato@musau.com",
                     "phone":"05677823158",
-                    "password":'pato123'  
+                    "password":'pato123',
+                    "retype_password":"pato123"  
                 }
         self.user_2={
                     "username":"pogie",
                     "name":"Paul Pogba",
                     "email":"pogie123@gmail.com",
                     "phone":"045677",
-                    "password":'pogie'  
+                    "password":'pogie',
+                    "retype_password":"pogie"   
                 }
             
 
