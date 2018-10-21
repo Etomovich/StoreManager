@@ -54,9 +54,9 @@ class LoginTests(unittest.TestCase):
     def test_registration_with_valid_credentials(self):
         '''Tests that a user is registered successfully'''
 
-        access = self.get_admin_access()
-        response = self.client.post('/api/v1/admin/users', data=self.user_1,headers=access,content_type='application/json')
-        self.assertEqual(response.get_data, "")
+        self.client.environ_base['Authorization'] = self.get_admin_access()
+        response = self.client.post('/api/v1/admin/users', data=self.user_1,content_type='application/json')
+        self.assertEqual(response.get_data(), "")
 
         #self.assertEqual(response.status_code, 201)
 
