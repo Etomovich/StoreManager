@@ -10,7 +10,7 @@ before_script:
 # command to run tests
 script: 
 
-  - nosetests store_app/tests --with-coverage --cover-package=store_app
+  - nosetests --with-coverage --cover-package=store_app
   - coverage report -m
 after_success:
   - coverallslanguage: python

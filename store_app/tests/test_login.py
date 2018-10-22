@@ -31,6 +31,9 @@ class LoginTests(unittest.TestCase):
             {"username": "pato", "password": "pato123"})
         self.invalid_credentials = json.dumps(
             {"username": "pato", "password": "etyy"})
+
+        self.incomplete_credentials = json.dumps(
+            {"username": "etomovich", "password": ""})
             
         self.app = create_app("testing")
         self.client = self.app.test_client()
@@ -49,27 +52,49 @@ class LoginTests(unittest.TestCase):
         admin_message = self.client.post("/api/v1/login",
                                             data=self.root_access,
                                             content_type='application/json')
-        
-        
-        data=admin_message.data.decode()
-        self.assertEqual(admin_message.status_code,200,msg="Admin should have ability to login to the system")
-        
 
-        def test_create_user(self):
-            s = Serializer(Config.SECRET_KEY, expires_in=21600)
-            token = s.dumps({'username': 'etomovich'})
-            admin_message = self.client.post("/api/v1/admin/users",
+        output = json.loads(admin_message.data.decode())
+        expected= "Login successful!! This token will be used to access all protected endpoints and will be valid for the next 6hrs then you will have to login again to access another token"
+        
+        self.assertEqual(output['message'],expected,msg="Admin should have ability to login to the system")
+        
+        self.assertEqual(admin_message.status_code,200,msg="Admin should have ability to login to the system")
+
+    def test_login_wrong_user(self):
+        admin_message = self.client.post("/api/v1/login",
+                                            data=self.invalid_credentials,
+                                            content_type='application/json')
+
+        output = json.loads(admin_message.data.decode())
+        expected={'message': 'user does not exist'}
+        
+        self.assertEqual(output,expected,msg="A user not in the system should not be allowed to log in")
+        self.assertEqual(admin_message.status_code,401,msg="A  user not in the system should not be allowed to log in")
+
+    def test_incomplete_credentials(self):
+        answ= self.client.post("/api/v1/login",
+                                            data=self.incomplete_credentials,
+                                            content_type='application/json')
+        output = json.loads(answ.data.decode())
+        expected= {'message': 'You have entered a wrong password or username'}
+
+        self.assertEqual(output,expected,msg="Incomplete credentials not allowed")
+
+    def test_create_user(self):
+        s = Serializer(Config.SECRET_KEY, expires_in=21600)
+        token = s.dumps({'username': 'etomovich'})
+
+        answ= self.client.post("/api/v1/admin/users",
                                             data=self.user_1,
                                             content_type='application/json',
-                                            headers={"Authorization":token.decode('ascii')})
+                                            headers={'Authorization':token.decode('ascii')})
 
-            data=admin_message.data.decode()
-            self.assertEqual("CREATED",data[1],msg="Admin should have ability to create users")
-            self.assertEqual(admin_message.status_code,201,msg="Admin should have ability to create users")
-            
+        output = json.loads(answ.data.decode())
+        self.assertEqual(answ.status_code,201,msg="Incomplete credentials not allowed")
+        
 
-        
-        
+
+   
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

@@ -1,6 +1,7 @@
-from flask import request, make_response, jsonify
+from flask import request, make_response, jsonify,g
 from flask_restful import Resource, Api
 from store_app.api.version1 import bp,users,userslist
+from store_app import create_app
 
 from store_app.api.version1.pagination import Kurasa
 from store_app.api.version1.errors import error_response
@@ -19,16 +20,18 @@ auth = HTTPTokenAuth(scheme='Token')
 
 
 @auth.verify_token
-def verify_authentication_token(token):
-    s = Serializer(Config.SECRET_KEY)
+def verify_token(token):
+    g.user = None
     try:
         token = request.headers.get('Authorization')
+        s = Serializer(Config.SECRET_KEY)
         data = s.loads(str(token))
-    except SignatureExpired:
-        return False # valid token, but expired
-    except BadSignature:
-        return False  # invalid token'''
-    return True
+    except:
+        return False
+    if 'username' in data:
+        g.user = data['username']
+        return True
+    return False
     
 
 class Start(Resource):
@@ -64,7 +67,7 @@ class LoginApi(Resource):
             else:
                 return({'message': 'You have entered a wrong password or username'}, 401)
         except:
-            return({'message': 'user does not exist'}, 404)
+            return({'message': 'user does not exist'}, 401)
 
 the_api.add_resource(LoginApi, '/login') 
 
