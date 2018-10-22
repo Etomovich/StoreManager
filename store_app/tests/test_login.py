@@ -80,17 +80,7 @@ class LoginTests(unittest.TestCase):
 
         self.assertEqual(output,expected,msg="Incomplete credentials not allowed")
 
-    def test_create_user(self):
-        s = Serializer(Config.SECRET_KEY, expires_in=21600)
-        token = s.dumps({'username': 'etomovich'})
 
-        answ= self.client.post("/api/v1/admin/users",
-                                            data=self.user_1,
-                                            content_type='application/json',
-                                            headers={'Authorization':token.decode('ascii')})
-
-        output = json.loads(answ.data.decode())
-        self.assertEqual(answ.status_code,201,msg="Incomplete credentials not allowed")
         
 
 
