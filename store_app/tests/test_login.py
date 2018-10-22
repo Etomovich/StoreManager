@@ -71,6 +71,8 @@ class LoginTests(unittest.TestCase):
         self.assertEqual(output,expected,msg="A user not in the system should not be allowed to log in")
         self.assertEqual(admin_message.status_code,401,msg="A  user not in the system should not be allowed to log in")
 
+
+    #Test 
     def test_incomplete_credentials(self):
         answ= self.client.post("/api/v1/login",
                                             data=self.incomplete_credentials,
@@ -79,6 +81,9 @@ class LoginTests(unittest.TestCase):
         expected= {'message': 'You have entered a wrong password or username'}
 
         self.assertEqual(output,expected,msg="Incomplete credentials not allowed")
+        self.assertEqual(answ.status_code,401,msg="Incomplete credentials not allowed")
+
+    
 
 
         
