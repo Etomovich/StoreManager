@@ -103,11 +103,13 @@ class LoginTests(unittest.TestCase):
         token = s.dumps({'username': 'etomovich'})
 
         answ= self.client.get("/api/v1/admin/users",
+                                            data="",
                                             content_type='application/json',
                                             headers={'Authorization':token.decode('ascii')})
 
-        self.assertEqual(answ.status_code,200,msg="Incomplete credentials not allowed")	  
+        self.assertEqual(answ.status_code,200,msg="Fetch data not working")	  
 
+    
 
    
 

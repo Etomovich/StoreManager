@@ -118,7 +118,8 @@ class UsersCollection(Resource):
         user = bank['username']       
         if users[user]['role'] is not "Admin":
             message ='This is an Admin View!! Contact admin for more details!!'
-            return error_response(403,message)
+            #return error_response(403,message)
+            return 45
 
         #Take the data
         data = request.get_json(force =True) or {}
@@ -155,7 +156,8 @@ class UsersCollection(Resource):
                 the_role= data['role']
             else:
                 message ='The role can either be "Admin" or "User"'
-                return error_response(4006,message) 
+                #return error_response(4006,message) 
+                return 8
         except:
             the_role='User'
 
