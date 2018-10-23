@@ -30,8 +30,19 @@ products ={
             "items_in_stock":[]
         }
     }
+
+items_in_stock={
+     1:{"item_name":"Kiwi 300g","serial_no":"rttrfhy","expiration":"2018-08-13","product_id":1, "state":"ON_SHELF"},
+     2:{"item_name":"Kiwi 300g","serial_no":"timto","expiration":"2018-08-13","product_id":1, "state":"ON_SHELF"},
+     3:{"item_name":"Kiwi 300g","serial_no":"timto2","expiration":"2018-08-13","product_id":1, "state":"ON_SHELF"},
+     4:{"item_name":"Kiwi 300g","serial_no":"timto3","expiration":"2018-08-13","product_id":1, "state":"ON_SHELF"},
+     5:{"item_name":"Kiwi 300g","serial_no":"timto4","expiration":"2018-08-13","product_id":1, "state":"ON_SHELF"}
+}
+
+list_of_items=[{"item_id":1}, {"item_id":2}, {"item_id":3},{"item_id":4}, {"item_id":5} ]
+recovered_item_ids=[]
 list_of_products=[{1:"Kiwi 300g"},{2:"Dasani 1/2 litre"},{3:"Fanta 1 litre"}]
 recovered_product_ids=[]
 
 from store_app.api.version1.user_resources import the_api
-from store_app.api.version1 import pagination,errors,user_resources,category
+from store_app.api.version1 import pagination,errors,user_resources,category,product_resources
