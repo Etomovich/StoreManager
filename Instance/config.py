@@ -6,5 +6,5 @@ class Config(object):
     PAGE_PRODUCTS = 7
     PAGE_ITEMS = 10
 
-class ConfigTesting(Config):
+class TestingConfig(Config):
     DEBUG  = True
