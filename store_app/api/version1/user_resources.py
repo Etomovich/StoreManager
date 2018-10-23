@@ -9,7 +9,7 @@ from store_app.api.version1.errors import error_response
 from itsdangerous import (TimedJSONWebSignatureSerializer as Serializer, BadSignature, SignatureExpired)
 from werkzeug.security import generate_password_hash, check_password_hash
 from Instance.config import Config
-
+  
 
 from flask_httpauth import HTTPTokenAuth
 
@@ -98,6 +98,7 @@ class UsersCollection(Resource):
             wangwana_details[item] = users[item]
 
         reply = {
+            "Status":"OK",
             "Users": wangwana_details,
             "Total Pages": str(kur.no_of_pages),
             "Next Page":"http://127.0.0.1:5000/api/v1/admin/users?page="+str(page+1) if kur.has_next(page) else "END",
@@ -123,25 +124,30 @@ class UsersCollection(Resource):
         data = request.get_json(force =True) or {}
         if 'username' not in data or 'name' not in data or 'email' not in data  or 'phone' not in data  or 'password' not in data or 'retype_password' not in data:
             message ='Please ensure that you put in the data for the following keys:[username,name,email,phone,password,retype_password]'
-            return error_response(400,message)
+            #return error_response(4001,message)
+            return 1
         
         if data['password'] != data["retype_password"]:
             message ='Make sure password and retype password are equal'
-            return error_response(400,message)
+            #return error_response(4002,message)
+            return 2
 
 
         for pers in userslist:
             if pers == data['username']:
                 message ='The username you used is already in the system'
-                return error_response(400,message)
+                #return error_response(4003,message)
+                return 3
 
             if users[pers]['email'] == data["email"]:
                 message ='The email you used is already in the system'
-                return error_response(400,message)
+                #return error_response(4004,message)
+                return 4
 
             if users[pers]['phone'] == data["phone"]:
                 message ='The phone number you used is already in the system'
-                return error_response(400,message)
+                #return error_response(4005,message)
+                return 6
 
         the_role = "User"
         try:
@@ -149,7 +155,7 @@ class UsersCollection(Resource):
                 the_role= data['role']
             else:
                 message ='The role can either be "Admin" or "User"'
-                return error_response(400,message) 
+                return error_response(4006,message) 
         except:
             the_role='User'
 
