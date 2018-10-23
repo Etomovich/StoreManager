@@ -107,11 +107,9 @@ class LoginTests(unittest.TestCase):
                                             content_type='application/json',
                                             headers={'Authorization':token.decode('ascii')})
 
-        self.assertEqual(answ.status_code,200,msg="Fetch data not working")	  
+        self.assertEqual(answ.status_code,200,msg="Fetch data not working")	
 
-    
-
-   
+       
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

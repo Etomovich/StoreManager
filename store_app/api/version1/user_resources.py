@@ -118,37 +118,36 @@ class UsersCollection(Resource):
         user = bank['username']       
         if users[user]['role'] is not "Admin":
             message ='This is an Admin View!! Contact admin for more details!!'
-            #return error_response(403,message)
-            return 45
+            return error_response(403,message)
 
         #Take the data
         data = request.get_json(force =True) or {}
         if 'username' not in data or 'name' not in data or 'email' not in data  or 'phone' not in data  or 'password' not in data or 'retype_password' not in data:
             message ='Please ensure that you put in the data for the following keys:[username,name,email,phone,password,retype_password]'
-            #return error_response(4001,message)
-            return 1
+            return error_response(4001,message)
+
         
         if data['password'] != data["retype_password"]:
             message ='Make sure password and retype password are equal'
-            #return error_response(4002,message)
-            return 2
+            return error_response(4002,message)
+
 
 
         for pers in userslist:
             if pers == data['username']:
                 message ='The username you used is already in the system'
-                #return error_response(4003,message)
-                return 3
+                return error_response(4003,message)
+
 
             if users[pers]['email'] == data["email"]:
                 message ='The email you used is already in the system'
-                #return error_response(4004,message)
-                return 4
+                return error_response(4004,message)
+
 
             if users[pers]['phone'] == data["phone"]:
                 message ='The phone number you used is already in the system'
-                #return error_response(4005,message)
-                return 6
+                return error_response(4005,message)
+
 
         the_role = "User"
         try:
@@ -156,8 +155,8 @@ class UsersCollection(Resource):
                 the_role= data['role']
             else:
                 message ='The role can either be "Admin" or "User"'
-                #return error_response(4006,message) 
-                return 8
+                return error_response(4006,message) 
+
         except:
             the_role='User'
 
