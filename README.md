@@ -1,4 +1,4 @@
-[![Coverage Status](https://coveralls.io/repos/github/Etomovich/StoreManager/badge.svg?branch=ft-make-file-structure-161336289)](https://coveralls.io/github/Etomovich/StoreManager?branch=ft-make-file-structure-161336289)[![Build Status](https://travis-ci.org/Etomovich/StoreManager.svg?branch=ft-make-file-structure-161336289)](https://travis-ci.org/Etomovich/StoreManager.svg?branch=ft-make-file-structure-161336289)
+[![Coverage Status](https://coveralls.io/repos/github/Etomovich/StoreManager/badge.svg?branch=ft-implement-create-user-161350147)](https://coveralls.io/github/Etomovich/StoreManager?branch=ft-implement-create-user-161350147)[![Build Status](https://travis-ci.org/Etomovich/StoreManager.svg?branch=ft-implement-create-user-161350147)](https://travis-ci.org/Etomovich/StoreManager.svg?branch=ft-implement-create-user-161350147)
 **Etomovich Store Manager**
 
 Etomovich Store Manager is an online Store management tool that enables store owners to oversee their business and store attendant to keep track of their sales per day.
