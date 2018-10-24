@@ -21,8 +21,5 @@ class UserViewsCase(unittest.TestCase):
                     "retype_password":"pato123"  
                 }
 
-        s = Serializer(Config.SECRET_KEY, expires_in=21600)
-        self.root_access= (s.dumps({'user_id': 'deee5d4e7eac420cb53179d1b9154a92'})).decode("ascii")
-        self.invalid_access= (s.dumps({'user_id': 'deee5d4e7e92'})).decode('ascii')
 
     

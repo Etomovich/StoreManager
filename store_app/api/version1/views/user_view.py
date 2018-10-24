@@ -6,7 +6,7 @@ from store_app.api.version1.errors import error_response
 
 user_api = Api(bp)
 
-class UserViews(Resource):
+class UserRegister(Resource):
     def post(self):
         data = request.get_json(force =True) or {}		
         try:
@@ -35,4 +35,25 @@ class UserViews(Resource):
             return answ       
 
 
-user_api.add_resource(UserViews, "/register")
+user_api.add_resource(UserRegister, "/register")
+
+class UserLogin(Resource):
+    def post(self):
+        data = request.get_json(force =True) or {}
+        user_db = user_model.UserModel()
+        reply_info = user_db.login_user(data)
+        if reply_info == "Incomplete data!!" or reply_info == "Wrong Credentials!!":
+            resp = {"Status": reply_info}
+            answ = make_response(jsonify(resp),401)
+            answ.content_type='application/json;charset=utf-8'
+            return answ
+        else:
+            resp = {"Status":"LoggedIn","Token": reply_info}
+            answ = make_response(jsonify(resp),200)
+            answ.content_type='application/json;charset=utf-8'
+            return answ
+
+user_api.add_resource(UserLogin, "/login")
+
+
+        

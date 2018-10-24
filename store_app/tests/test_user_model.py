@@ -109,4 +109,21 @@ class UserModelCase(unittest.TestCase):
 
         self.assertEqual(answ,"Role can either be Admin or User", msg="A user cannot be created with invalid data")
 
+    def test_user_login_for_correct_user(self):
+        users_DB = user_model.UserModel()
+        answ = users_DB.login_user({"username":"etomovich", "password":"etomovich"})
+        self.assertFalse(answ=='Incomplete data!!', msg="Login user not working correctly")
+
+    def test_user_login_for_incomplete_credentials(self):
+        users_DB = user_model.UserModel()
+        answ = users_DB.login_user({"username":"etomovich"})
+        self.assertTrue(answ=='Incomplete data!!', msg="Login user not working correctly")
+
+    def test_user_login_for_wrong_credentials(self):
+        users_DB = user_model.UserModel()
+        answ = users_DB.login_user({"username":"etomovich", "password":"password"})
+        self.assertFalse(answ=='Incomplete data!!', msg="Login user not working correctly")
+
+
+
 

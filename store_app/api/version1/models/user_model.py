@@ -14,7 +14,7 @@ class UserModel(object):
                     "email":"etolejames@gmail.com",
                     "role":"Admin",
                     "phone":"0717823158",
-                    "password":""  
+                    "password":'pbkdf2:sha256:50000$FHR84Kvn$756569c43e9922b773f22f381bd4ef08ac85d87c255b0accb47a7cef888ddc45'  
                 }
             }
    
@@ -89,6 +89,27 @@ class UserModel(object):
         #Add data to our store:
         UserModel.user_fetch_data[uuid.uuid4().hex] = dict_user
         return "CREATED"
+    
+    def login_user(self, data={}):
+        '''This method allows the admin to create a user'''
+
+        #Data validation
+        if 'username' not in data or 'password' not in data:
+            message ='Incomplete data!!'
+            return message
+
+        for item in UserModel.user_fetch_data.keys():
+            data_in_question = UserModel.user_fetch_data[item]
+            if data_in_question['username'] == data['username'] and check_password_hash(data_in_question['password'], data['password']):
+                s = Serializer(Config.SECRET_KEY, expires_in=21600)
+                token = (s.dumps({'user_id': item})).decode("ascii")
+                return token
+
+            else:
+                return"Wrong Credentials!!"
+        
+
+
 
         
 
