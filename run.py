@@ -1,6 +1,7 @@
 from store_app import create_app
+from Instance.config import Config
 
-app = create_app('default')
+app = create_app(Config)
 app_context = app.app_context()
 app_context.push()
 
