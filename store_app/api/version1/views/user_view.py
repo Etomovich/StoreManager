@@ -8,25 +8,31 @@ user_api = Api(bp)
 
 class UserViews(Resource):
     def post(self):
+        data = request.get_json(force =True) or {}		
         try:
             auth= False
             auth = request.headers['Authorization']
+
+            if auth:
+                data['Authorization'] = auth 
+            user_db = user_model.UserModel()
+            reply_info = user_db.create_user(data)
+
+            if reply_info == "CREATED":
+                pack = {"Status":reply_info}
+                answ = make_response(jsonify(pack),201)
+                answ.content_type='application/json;charset=utf-8'
+                return answ
+            else:
+                pack = {"Status":reply_info}
+                answ = make_response(jsonify(pack),401)
+                answ.content_type='application/json;charset=utf-8'
+                return answ
         except:
             reply_info = "This is a protected View!! Provide you login token!!"
             answ = make_response(jsonify(reply_info),401)
             answ.content_type='application/json;charset=utf-8'
-            return answ
-
-        data = request.get_json(force =True) or {}
-        if auth:
-            data['Authorization'] = auth 
-        user_db = user_model.UserModel()
-        reply_info = user_db.create_user(data)
-
-        answ = make_response(jsonify(reply_info),201)
-        answ.content_type='application/json;charset=utf-8'
-
-        return answ
+            return answ       
 
 
 user_api.add_resource(UserViews, "/register")

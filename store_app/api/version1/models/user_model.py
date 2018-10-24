@@ -54,7 +54,7 @@ class UserModel(object):
                     return message
 
             if key == 'password':
-                if data['password'] is not data["retype_password"]:
+                if data['password'] != data["retype_password"]:
                     message ='Retype password and password should be equal.'
                     return message
 
