@@ -6,13 +6,13 @@ from itsdangerous import (TimedJSONWebSignatureSerializer as Serializer, BadSign
 class UserModelCase(unittest.TestCase):
     def setUp(self):
         self.user_1= {
-                "username":"anthony",
-                "name":"Anthony Kamau",
-                "email":"kamau@gmail.com",
-                "role":"User",
-                "phone":"07157678",
-                "password":"kama",
-                'retype_password':'kama'
+                "username":"etomovich",
+                "name":"James Etole",
+                "email":"etolejames@gmail.com",
+                "role":"Admin",
+                "phone":"0717823158",
+                "password":"etole123",
+                'retype_password':'etole123'
             }
 
         self.user_2= {
@@ -25,68 +25,16 @@ class UserModelCase(unittest.TestCase):
                 'retype_password':'pogie'
             }
 
-        s = Serializer(Config.SECRET_KEY, expires_in=21600)
-        self.root_access= (s.dumps({'user_id': 'deee5d4e7eac420cb53179d1b9154a92'})).decode("ascii")
-        self.invalid_access= (s.dumps({'user_id': 'deee5d4e7e92'})).decode('ascii')
-
 
     def test_create_user_from_root(self):
         users_DB = user_model.UserModel()
-        self.user_1['Authorization'] = self.root_access
         answ = users_DB.create_user(self.user_1)
-        self.user_1.pop("Authorization")
         self.assertEqual(answ,"CREATED", msg="There is an error when creating user with valid credentials")
         #remove user after test
-
-    def test_create_user_with_decodable_token_bt_user_is_not_in_system(self):
-        users_DB = user_model.UserModel()
-        self.user_2['Authorization'] = self.invalid_access
-        answ = users_DB.create_user(self.user_2)
-        self.user_2.pop("Authorization")
-        self.assertEqual(answ,"Updater cannot be located", msg="Error when creating user")
-        #remove user after test
-
-
-    def test_create_user_with_incomplete_data(self):
-        self.user_2.pop("username")
-        users_DB = user_model.UserModel()
-        self.user_1['Authorization'] = self.root_access
-        answ = users_DB.create_user(self.user_2)
-        self.user_2['username'] = "pogie"
-
-        self.assertEqual(answ,"Incomplete data!!", msg="A user cannot be created with invalid data")
-
-    def test_user_already_exists(self):
-        self.user_2["username"] ="etomovich"
-        users_DB = user_model.UserModel()
-        self.user_2['Authorization'] = self.root_access
-        answ = users_DB.create_user(self.user_2)
-        self.user_2['username'] = "pogie"
-
-        self.assertEqual(answ,"The username is already in the system", msg="A user cannot be created with invalid data")
-
-    def test_email_already_exists(self):
-        self.user_2["email"] ="etolejames@gmail.com"
-        users_DB = user_model.UserModel()
-        self.user_2['Authorization'] = self.root_access
-        answ = users_DB.create_user(self.user_2)
-        self.user_2['email'] = "paulpogba@gmail.com"
-
-        self.assertEqual(answ,"The email already in use in the system.", msg="A user cannot be created with invalid data")
-
-    def test_phone_already_exists(self):
-        self.user_2["phone"] ="0717823158"
-        users_DB = user_model.UserModel()
-        self.user_2['Authorization'] = self.root_access
-        answ = users_DB.create_user(self.user_2)
-        self.user_2['phone'] = "0717823158"
-
-        self.assertEqual(answ,"This phone number is in use", msg="A user cannot be created with invalid data")
 
     def test_create_user_with_bad_email(self):
         self.user_2["email"]='pogba_thee_og'
         users_DB = user_model.UserModel()
-        self.user_2['Authorization'] = self.root_access
         answ = users_DB.create_user(self.user_2)
 
         self.assertEqual(answ,'Incorrect email format', msg="A user cannot be created with invalid data")
@@ -94,7 +42,6 @@ class UserModelCase(unittest.TestCase):
     def test_password_and_retype_pasword_not_equal(self):
         self.user_2["password"] ="paka"
         users_DB = user_model.UserModel()
-        self.user_2['Authorization'] = self.root_access
         answ = users_DB.create_user(self.user_2)
         self.user_2['password'] = "pogie"
 
@@ -103,12 +50,11 @@ class UserModelCase(unittest.TestCase):
     def test_role_either_admin_or_user(self):
         self.user_2["role"] ="paka"
         users_DB = user_model.UserModel()
-        self.user_2['Authorization'] = self.root_access
         answ = users_DB.create_user(self.user_2)
         self.user_2['role'] = "User"
 
         self.assertEqual(answ,"Role can either be Admin or User", msg="A user cannot be created with invalid data")
-
+    
     def test_user_login_for_correct_user(self):
         users_DB = user_model.UserModel()
         answ = users_DB.login_user({"username":"etomovich", "password":"etomovich"})
@@ -125,5 +71,39 @@ class UserModelCase(unittest.TestCase):
         self.assertFalse(answ=='Incomplete data!!', msg="Login user not working correctly")
 
 
+    def test_unauthorized_edit_a_user(self):
+        users_DB = user_model.UserModel()
+        answ = users_DB.edit_user({"Authorization":"UONGO"})
+        self.assertEqual(answ,'Wrong Authorization Key', msg="Error when creating user")
+        #remove user after test
+
+    def test_create_user_with_decodable_token_bt_user_is_not_in_system(self):
+        users_DB = user_model.UserModel()
+        auth={}
+        auth['Authorization'] = "etooeleleeelelle"
+        auth['role'] = "Admin"
+        answ = users_DB.edit_user(auth)
+        self.assertEqual(answ,'Wrong Authorization Key', msg="Error when creating user")
+        #remove user after test
+
+   
+    def test_attendant_changing_role_value(self):
+        users_DB = user_model.UserModel()
+        user_creation = users_DB.create_user(self.user_2)
+        att_token = users_DB.login_user({"username":"pogie", "password":"pogie"})
+        change_data= {"Authorization": att_token,"role":"Admin"}
+        answ = users_DB.edit_user(change_data)
+        self.assertEqual(answ,"Note that you cannot change username,name and role as a User. Contact Admin for more help!!", msg="Error when editing user")
+
+    def test_check_if_attendant_tries_to_edit_another_users_data(self):
+        users_DB = user_model.UserModel()
+        att_token = users_DB.login_user({"username":"pogie", "password":"pogie"})
+        change_data= {"Authorization": att_token,"user_changed":"Etomovich"}
+        answ = users_DB.edit_user(change_data)
+        self.assertEqual(answ,'You cannot edit another persons credentials', msg="Error when editing user")
 
 
+
+
+
+    

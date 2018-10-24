@@ -7,46 +7,17 @@ from Instance.config import Config
 class UserModel(object):
     '''This class allows a user to implement CRUD on a user object 
     '''
-    user_fetch_data={'deee5d4e7eac420cb53179d1b9154a92':
-                {
-                    "username":"etomovich",
-                    "name":"James Etole",
-                    "email":"etolejames@gmail.com",
-                    "role":"Admin",
-                    "phone":"0717823158",
-                    "password":'pbkdf2:sha256:50000$FHR84Kvn$756569c43e9922b773f22f381bd4ef08ac85d87c255b0accb47a7cef888ddc45'  
-                }
-            }
-   
+    user_fetch_data={}
 
     def create_user(self, data={}):
         '''This method allows the admin to create a user'''
 
         #Data validation
-        if 'Authorization' not in data or 'username' not in data or 'name' not in data or 'email' not in data  or 'phone' not\
+        if 'username' not in data or 'name' not in data or 'email' not in data  or 'phone' not\
                                                 in data  or 'password' not in data or 'retype_password' not in data:
             message ='Incomplete data!!'
             return message
         for key in data.keys():
-            if key == 'Authorization':
-                s = Serializer(Config.SECRET_KEY)
-                try:
-                    authorized = s.loads(data['Authorization'])
-                except:
-                    message ='Wrong Authorization Key'
-                    return message
-
-                ##Check if user exists and is admin
-                user_token = authorized['user_id']
-                try:
-                    user_data = UserModel.user_fetch_data[user_token]
-                    if user_data['role'] != "Admin":
-                        message ='This is an admin view'
-                        return message
-                except:
-                    message ='Updater cannot be located'
-                    return message
-
             #Check email validation
             if key == 'email':
                 if data[key].find("@") < 2:
@@ -105,15 +76,133 @@ class UserModel(object):
                 token = (s.dumps({'user_id': item})).decode("ascii")
                 return token
 
-            else:
-                return"Wrong Credentials!!"
-        
+        return"Wrong Credentials!!"
 
+    def edit_user(self, data={}):
+        if 'Authorization' not in data:
+            message ='Please enter your authorization key!!'
+            return message
+        for key in data.keys():
+            user_cre = ""
+            bearer_role = False
+            if key == 'Authorization':
+                s = Serializer(Config.SECRET_KEY)
+                try:
+                    authorized = s.loads(data['Authorization'])
+                except:
+                    message ='Wrong Authorization Key'
+                    return message
 
+                ##Check if user exists and is admin
+                user_cre = authorized['user_id']
+                try:
+                    user_data = UserModel.user_fetch_data[user_cre]
+                    bearer_role= user_data['role'] 
+                except:
+                    message ='Updater cannot be located'
+                    return message
 
-        
-
+            if bearer_role and bearer_role=="User":
+                if "username" in data.keys() or "name" in data.keys() or "role" in data.keys():
+                    message ='Note that you cannot change username,name and role as a User. Contact Admin for more help!!'
+                    return message
                 
+                #check if is owner of details he/she wants to change
+                if UserModel.user_fetch_data[user_cre]['username'] != data['user_changed']:#User_changed is url variable
+                    message ='You cannot edit another persons credentials'
+                    return message
 
+                #Check validation and store valid changes the user makes
+                changes = []
+                for item in data.keys():
+                    if key == 'email':
+                        if data[key].find("@") < 2:
+                            message ='Incorrect email format'
+                            return message
+
+                        changes.append("email")
+
+                    if key == 'password':
+                        if "retype_password" not in data.keys():
+                            message ='You must enter a [retype_password] Key!!'
+                            return message
+
+                        if data['password'] != data["retype_password"]:
+                            message ='Retype password and password should be equal.'
+                            return message
+
+                        changes.append("password")
+
+                    if key == 'phone':
+                        changes.append("phone")
+
+                #Make the changes
+                for item in changes:
+                    UserModel.user_fetch_data[user_cre][item] = data[item]
+                    message ='Edit completed succesfully.'
+                    return message
+
+            if bearer_role and bearer_role=="Admin":
+                #Check validation and store valid changes the user makes
+                changes = []
+                for item in data.keys():
+                    #Check email validation
+                    if key == 'email':
+                        if data[key].find("@") < 2:
+                            message ='Incorrect email format'
+                            return message
+
+                        for item in UserModel.user_fetch_data.keys():
+                            data_in_question = UserModel.user_fetch_data[item]
+                            if data_in_question['email'] == data['email']:
+                                message ='The email is already in the system'
+                                return message
+
+                        changes.append("email")
+
+                    if key == 'password':
+                        if "retype_password" not in data.keys():
+                            message ='You must enter a [retype_password] Key!!'
+                            return message
+
+                        if data['password'] != data["retype_password"]:
+                            message ='Retype password and password should be equal.'
+                            return message
+
+                        changes.append("password")
+
+                    if key == 'phone':
+                        for item in UserModel.user_fetch_data.keys():
+                            data_in_question = UserModel.user_fetch_data[item]
+                            if data_in_question['phone'] == data['phone']:
+                                message ='The phone is already in the system'
+                                return message
+
+                        changes.append("phone")
+
+                    if key == 'username':
+                        for item in UserModel.user_fetch_data.keys():
+                            data_in_question = UserModel.user_fetch_data[item]
+                            if data_in_question['username'] == data['username']:
+                                message ='The username is already in the system'
+                                return 
+                    
+                    if key == 'role':
+                        if not(data['role'] is "Admin" or data['role'] is "User") :
+                            message ='Role can either be Admin or User'
+                            return message
+                        
+
+            
+
+                #Make the changes
+                for item in changes:
+                    UserModel.user_fetch_data[user_cre][item] = data[item]
+                    message ='Edit completed succesfully.'
+                    return message
+
+
+        return "Updater not located"
         
+    
 
