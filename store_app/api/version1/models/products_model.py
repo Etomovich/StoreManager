@@ -67,7 +67,13 @@ class Products(object):
         return len(Products.fetch_products.keys())
 
     def list_of_products(self):
-        return Products.fetch_products.keys()
+        gg=[]
+        for item in Products.fetch_products.keys():
+            ty ={}
+            ty[item] = Products.fetch_products[item]
+            gg.append(ty)
+        
+        return gg
 
     def get_product_item(self, product_id):
         if int(product_id) in Products.fetch_products.keys():
