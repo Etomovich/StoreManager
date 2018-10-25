@@ -34,7 +34,7 @@ def verify_token(token):
 
 @auth.verify_token
 class FetchAllProducts(Resource):
-    def post(self):
+    def get(self):
         token = request.headers.get('Authorization')
         s = Serializer(Config.SECRET_KEY, expires_in=21600)
         user_id = s.loads(str(token))
@@ -71,3 +71,39 @@ class FetchAllProducts(Resource):
 
 products_api.add_resource(FetchAllProducts, "/products")
 
+
+@auth.verify_token
+class FetchSpecificProduct(Resource):
+    def get(self, productId):
+        token = request.headers.get('Authorization')
+        s = Serializer(Config.SECRET_KEY, expires_in=21600)
+        user_id = s.loads(str(token))
+        try:
+            this_user = UserModel.user_fetch_data[user_id]
+        except:
+            reply_info = "UNKNOWN USER!!"
+            answ = make_response(jsonify(reply_info),201)
+            answ.content_type='application/json;charset=utf-8'
+            return answ
+
+        #Return results
+        prod = Products()
+        prod_details = prod.get_product_item(int(productId))
+
+        if prod_details:           
+            reply = {
+                "Status":"OK",
+                "Products": prod_details
+            }
+            answ = make_response(jsonify(reply),200)
+            answ.content_type='application/json;charset=utf-8'
+        else:
+            reply = {
+                "Status":"FAILED",
+                "Message": "Product cannot be found!!"
+            }
+            answ = make_response(jsonify(reply),400)
+            answ.content_type='application/json;charset=utf-8'
+     
+
+products_api.add_resource(FetchSpecificProduct, "/products/<productId>")
