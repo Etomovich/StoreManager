@@ -71,36 +71,6 @@ class UserModelCase(unittest.TestCase):
         self.assertFalse(answ=='Incomplete data!!', msg="Login user not working correctly")
 
 
-    def test_unauthorized_edit_a_user(self):
-        users_DB = user_model.UserModel()
-        answ = users_DB.edit_user({"Authorization":"UONGO"})
-        self.assertEqual(answ,'Wrong Authorization Key', msg="Error when creating user")
-        #remove user after test
-
-    def test_create_user_with_decodable_token_bt_user_is_not_in_system(self):
-        users_DB = user_model.UserModel()
-        auth={}
-        auth['Authorization'] = "etooeleleeelelle"
-        auth['role'] = "Admin"
-        answ = users_DB.edit_user(auth)
-        self.assertEqual(answ,'Wrong Authorization Key', msg="Error when creating user")
-        #remove user after test
-
-   
-    def test_attendant_changing_role_value(self):
-        users_DB = user_model.UserModel()
-        user_creation = users_DB.create_user(self.user_2)
-        att_token = users_DB.login_user({"username":"pogie", "password":"pogie"})
-        change_data= {"Authorization": att_token,"role":"Admin"}
-        answ = users_DB.edit_user(change_data)
-        self.assertEqual(answ,"Note that you cannot change username,name and role as a User. Contact Admin for more help!!", msg="Error when editing user")
-
-    def test_check_if_attendant_tries_to_edit_another_users_data(self):
-        users_DB = user_model.UserModel()
-        att_token = users_DB.login_user({"username":"pogie", "password":"pogie"})
-        change_data= {"Authorization": att_token,"user_changed":"Etomovich"}
-        answ = users_DB.edit_user(change_data)
-        self.assertEqual(answ,'You cannot edit another persons credentials', msg="Error when editing user")
 
 
 
