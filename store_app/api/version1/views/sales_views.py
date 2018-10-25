@@ -78,7 +78,8 @@ class FetchAllSales(Resource):
             answ.content_type='application/json;charset=utf-8'
             return answ
 
-        data = request.get_json(force =True) or {}		 
+        data = request.get_json(force =True) or {}
+        data['attendant'] = current_user['username']		 
         sales_db = Sales()
         reply_info = sales_db.create_sale(data)
 

@@ -138,6 +138,24 @@ products_api.add_resource(SearchSpecificProduct, "/products/search/<name>")
 
 class DeleteProduct(Resource):
     def delete(self, productId):
+        current_user = ""
+        token = request.headers.get('Authorization')
+        s = Serializer(Config.SECRET_KEY, expires_in=21600)
+        try:
+            data = s.loads(str(token))
+            current_user = UserModel.user_fetch_data[data['user_id']]
+        except:
+            reply="You are not authorized to view this page!!"
+            answ = make_response(jsonify(reply),401)
+            answ.content_type='application/json;charset=utf-8'
+            return answ
+
+        if current_user['role'] == "User":
+            reply="This is an Admin Page contact admin for more help!!"
+            answ = make_response(jsonify(reply),401)
+            answ.content_type='application/json;charset=utf-8'
+            return answ
+            
         product_db = Products()
         reply_info = False
         reply_info = product_db.delete_item(productId)
