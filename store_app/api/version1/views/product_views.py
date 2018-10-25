@@ -48,8 +48,8 @@ class FetchAllProducts(Resource):
         current_user = ""
         token = request.headers.get('Authorization')
         s = Serializer(Config.SECRET_KEY, expires_in=21600)
-        data = s.loads(str(token))
         try:
+            data = s.loads(str(token))
             current_user = UserModel.user_fetch_data[data['user_id']]
         except:
             reply="You are not authorized to view this page!!"
@@ -106,6 +106,35 @@ class FetchSpecificProduct(Resource):
      
 
 products_api.add_resource(FetchSpecificProduct, "/products/<productId>")
+
+class SearchSpecificProduct(Resource):
+    def get(self, name):
+        product_db = Products()
+        reply_info = False
+        reply_info = product_db.search_for_product(name)
+
+        if len(reply_info)>0:
+            #Return results
+            kur = Kurasa(reply_info, 2)
+            page = request.args.get('page', 1, type=int)
+            wangwana = kur.get_items(page)
+            reply = {
+                "Status":"OK",
+                "Products": wangwana,
+                "Total Pages": str(kur.no_of_pages),
+                "Next Page":"http://127.0.0.1:5000/api/v1/products/search/<name>?page="+str(page+1) if kur.has_next(page) else "END",
+                "Prev Page":"http://127.0.0.1:5000/api/v1/products/search/<name>?page="+str(page-1) if kur.has_prev(page) else "BEGINNING"
+            }
+            answ = make_response(jsonify(reply),200)
+            answ.content_type='application/json;charset=utf-8'
+            return answ 
+        else:
+            pack = {"Status":"No product found!!"}
+            answ = make_response(jsonify(pack),400)
+            answ.content_type='application/json;charset=utf-8'
+            return answ 
+
+products_api.add_resource(SearchSpecificProduct, "/products/search/<name>")
 
 class DeleteProduct(Resource):
     def delete(self, productId):

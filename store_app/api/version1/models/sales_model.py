@@ -74,7 +74,13 @@ class Sales(object):
         return len(Sales.fetch_sales.keys())
 
     def list_of_sales(self):
-        return Sales.fetch_sales.keys()
+        gg=[]
+        for item in Sales.fetch_sales.keys():
+            ty ={}
+            ty[item] = Sales.fetch_sales[item]
+            gg.append(ty)
+        
+        return gg
 
     def get_sale_item(self, sales_id):
         if int(sales_id) in Sales.fetch_sales.keys():
