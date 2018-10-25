@@ -1,5 +1,6 @@
 import uuid
 
+
 class Products(object):
     fetch_products={}
     recovered_fetch_ids=[]
@@ -45,7 +46,7 @@ class Products(object):
         
         data_info ={
             "product_name": data['product_name'],
-            "price": data['price'],
+            "price": int(data['price']),
             "quantity": quantity if quantity else 0,
             "product_description": product_desc if product_desc else ""
         }

@@ -35,10 +35,15 @@ class Sales(object):
         sold_items=[]
         for item in data.keys():
             prod_data = Products.fetch_products[item]
-            total_amount = total_amount + (prod_data['price'] * data[item])
+
+            #check if sale will negate quantity
+            
+            if (Products.fetch_products[item]['quantity'] - data[item])<0:
+                return "This sale will cause quantity of "+str(data[item])+" to be negated hence sale is revoked"
+            total_amount = total_amount + (int(prod_data['price']) * data[item])
             item_sale = {
-                "Total": prod_data['price'] * data[item],
-                "Price": prod_data['price'],
+                "Total": int(prod_data['price']) * data[item],
+                "Price": int(prod_data['price']),
                 "Pieces Sold": data[item],
                 "product_name": prod_data['product_name']
             }
