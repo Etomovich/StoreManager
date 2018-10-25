@@ -56,27 +56,11 @@ class Products(object):
         search_results=[]
         for item in Products.fetch_products.keys():
             if Products.fetch_products[item]['product_name'].find(name) >=0:
-                search_results.append(Products.fetch_products[item])
+                reply =Products.fetch_products[item]
+                reply['product_id'] = item
+                search_results.append(reply)
 
         return search_results
-
-    def add_product(self, product_id, amount):
-        if int(product_id) in Products.fetch_products.keys():
-            try:
-                Products.fetch_products[int(product_id)]["quantity"] += int(amount)
-            except:
-                return "Amount should be an int"
-
-        return "Wrong product_id"
-
-    def remove_product(self, product_id, amount):
-        if int(product_id) in Products.fetch_products.keys():
-            try:
-                Products.fetch_products[int(product_id)]["quantity"] += int(amount)
-            except:
-                return "Amount should be an int"
-
-        return "Wrong product_id"
 
     def no_of_products(self):
         return len(Products.fetch_products.keys())

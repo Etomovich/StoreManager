@@ -47,14 +47,7 @@ class UserModelCase(unittest.TestCase):
 
         self.assertEqual(answ,"Retype password and password should be equal.", msg="A user cannot be created with invalid data")
 
-    def test_role_either_admin_or_user(self):
-        self.user_2["role"] ="paka"
-        users_DB = user_model.UserModel()
-        answ = users_DB.create_user(self.user_2)
-        self.user_2['role'] = "User"
-
-        self.assertEqual(answ,"Role can either be Admin or User", msg="A user cannot be created with invalid data")
-    
+ 
     def test_user_login_for_correct_user(self):
         users_DB = user_model.UserModel()
         answ = users_DB.login_user({"username":"etomovich", "password":"etomovich"})

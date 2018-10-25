@@ -73,6 +73,24 @@ class UserModel(object):
 
         return"Wrong Credentials!!"
 
+
+    def no_of_users(self):
+        return len(UserModel.user_fetch_data.keys())
+
+    def list_of_users(self):
+        return UserModel.user_fetch_data.keys()
+
+    def get_person(self, user_id):
+        if int(user_id) in UserModel.user_fetch_data.keys():
+            return UserModel.user_fetch_data[int(user_id)]
+        return False
+
+    def delete_user(self, user_id):
+        if int(user_id) in UserModel.user_fetch_data.keys():
+            UserModel.user_fetch_data.pop(int(user_id))           
+            return "DELETED"
+        return False
+
         
     
 
