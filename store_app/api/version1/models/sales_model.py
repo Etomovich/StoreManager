@@ -21,7 +21,7 @@ class Sales(object):
         #check if all products are there
         for item in data.keys():
             try:
-                prod_details = Products.fetch_products[item]               
+                prod_details = Products.fetch_products[int(item)]               
             except:
                 return "Product "+str(item)+" does not exist."
 
@@ -34,21 +34,21 @@ class Sales(object):
         total_amount = 0
         sold_items=[]
         for item in data.keys():
-            prod_data = Products.fetch_products[item]
+            prod_data = Products.fetch_products[int(item)]
 
             #check if sale will negate quantity
             
-            if (Products.fetch_products[item]['quantity'] - data[item])<0:
+            if (Products.fetch_products[int(item)]['quantity'] - int(data[item]))<0:
                 return "This sale will cause quantity of "+str(data[item])+" to be negated hence sale is revoked"
-            total_amount = total_amount + (int(prod_data['price']) * data[item])
+            total_amount = total_amount + (int(prod_data['price']) * int(data[item]))
             item_sale = {
-                "Total": int(prod_data['price']) * data[item],
+                "Total": int(prod_data['price']) * int(data[item]),
                 "Price": int(prod_data['price']),
                 "Pieces Sold": data[item],
                 "product_name": prod_data['product_name']
             }
             #Decrement Product
-            Products.fetch_products[item]['quantity'] -= data[item]
+            Products.fetch_products[int(item)]['quantity'] -=int(data[item])
             sold_items.append(item_sale)
 
         reply = {

@@ -3,7 +3,7 @@ import uuid
 
 class Products(object):
     fetch_products={}
-    recovered_fetch_ids=[]
+
 
 
 
@@ -28,7 +28,7 @@ class Products(object):
         try:
             quantity = data['quantity']
         except:
-            quantity_input = False
+            quantity = False
 
         #check if quantity can be converted to INT type
         try:

@@ -29,6 +29,11 @@ class UserModel(object):
                     message ='Retype password and password should be equal.'
                     return message
 
+            if key == 'role':
+                if data['role'] != "Admin" and data["role"] != "User":
+                    message ='role input can either be Admin or User'
+                    return message
+
         #Validate common user data.
         for item in UserModel.user_fetch_data.keys():
             data_in_question = UserModel.user_fetch_data[item]
